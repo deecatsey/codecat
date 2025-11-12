@@ -66,9 +66,6 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  registerCommand(context, "codecat.meowWorld", () => {
-    vscode.window.showInformationMessage("Hello World from CodeCat!");
-  });
   registerCommand(context, "codecat.petTheCat", () => {
     if (status === "alert") {
       vscode.window.showInformationMessage("Mrrreow! 😺💖");

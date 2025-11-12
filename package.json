@@ -14,10 +14,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "codecat.meowWorld",
-        "title": "CodeCat"
-      },
-      {
         "command": "codecat.petTheCat",
         "title": "Pet the cat!"
       }
