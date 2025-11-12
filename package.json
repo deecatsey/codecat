@@ -2,11 +2,11 @@
   "name": "coding-cat",
   "displayName": "Code Cat",
   "publisher": "dee-catsey",
-  "description": "Cat shaped rubber ducky that provides moral support from your status bar :).",
-  "version": "1.0.3",
+  "description": "Cat shaped rubber ducky that provides moral support from your status bar.",
+  "version": "1.0.6",
   "icon": "logo.png",
   "engines": {
-    "vscode": "^1.105.0"
+    "vscode": "^1.80.0"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
