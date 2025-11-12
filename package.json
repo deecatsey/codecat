@@ -16,8 +16,56 @@
       {
         "command": "codecat.meowWorld",
         "title": "CodeCat"
+      },
+      {
+        "command": "codecat.petTheCat",
+        "title": "Pet the cat!"
       }
-    ]
+    ],
+    "productIconThemes": [
+      {
+        "id": "icomoon",
+        "label": "Cat Icons",
+        "path": "./cat.json"
+      }
+    ],
+    "icons": {
+      "alert-1": {
+        "description": "cat alert 1",
+        "default": {
+          "fontPath": "./theme/icomoon.woff",
+          "fontCharacter": "\\E900"
+        }
+      },
+      "sleeping-1": {
+        "description": "Cat sleeping 1",
+        "default": {
+          "fontPath": "./theme/icomoon.woff",
+          "fontCharacter": "\\E901"
+        }
+      },
+      "sleeping-2": {
+        "description": "Cat sleeping 2",
+        "default": {
+          "fontPath": "./theme/icomoon.woff",
+          "fontCharacter": "\\E902"
+        }
+      },
+      "sleeping-3": {
+        "description": "Cat sleeping 3",
+        "default": {
+          "fontPath": "./theme/icomoon.woff",
+          "fontCharacter": "\\E903"
+        },
+        "sleeping-4": {
+          "description": "Cat sleeping 4",
+          "default": {
+            "fontPath": "./theme/icomoon.woff",
+            "fontCharacter": "\\E904"
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",

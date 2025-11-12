@@ -1,43 +1,86 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import * as path from "path";
+import { registerCommand } from "./utils";
+import { tooltipAlert, tooltipSleeping } from "./consts";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "codecat" is now active!');
-
-  //   const iconPath = vscode.Uri.file(
-  //     path.join(context.extensionPath, "media", "my-icon.svg")
-  //   );
-
-  const myStatusBarItem = vscode.window.createStatusBarItem(
+  const statusBarItem = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Right,
     100 // priority (higher = further left)
   );
-  myStatusBarItem.text = "$(rocket) Hello"; // $(icon) uses VS Code built-in icons
-  myStatusBarItem.tooltip = "Click me to say hello";
-  myStatusBarItem.command = "myExtension.sayHello"; // Command to run when clicked
-  //   myStatusBarItem.iconPath = iconPath;
-  myStatusBarItem.show(); // Make it visible
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  const disposable = vscode.commands.registerCommand(
-    "codecat.meowWorld",
-    () => {
-      // The code you place here will be executed every time your command is executed
-      // Display a message box to the user
-      vscode.window.showInformationMessage("Hello World from CodeCat!");
+  const framesAwake = [`$(alert-1)`];
+  const framesSleeping = [`$(sleeping-1)`, `$(sleeping-2)`, `$(sleeping-3)`];
+
+  let status: "alert" | "sleeping" = "sleeping";
+  let frames = framesSleeping;
+  let timeout: NodeJS.Timeout | undefined;
+  let i = 0;
+  let interval: NodeJS.Timeout;
+
+  statusBarItem.command = "codecat.petTheCat";
+  statusBarItem.show();
+
+  const startAnimation = () => {
+    interval = setInterval(() => {
+      statusBarItem.text = frames[i];
+      i = (i + 1) % frames.length;
+    }, 700);
+  };
+
+  const setCatAlert = () => {
+    status = "alert";
+    statusBarItem.tooltip = tooltipAlert;
+    statusBarItem.text = `${framesAwake[0]}`;
+  };
+
+  const setCatSleeping = () => {
+    status = "sleeping";
+    statusBarItem.tooltip = tooltipSleeping;
+    frames = framesSleeping;
+    statusBarItem.text = `${frames[0]}`;
+    startAnimation();
+  };
+
+  setCatSleeping();
+
+  const onTextChanged = vscode.workspace.onDidChangeTextDocument((event) => {
+    if (
+      vscode.window.activeTextEditor &&
+      event.document === vscode.window.activeTextEditor.document
+    ) {
+      if (status !== "alert") {
+        setCatAlert();
+        clearInterval(interval);
+      }
+
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      // Reset to default state if no typing
+      timeout = setTimeout(() => {
+        setCatSleeping();
+      }, 5000); // 1000 milliseconds = 1 seconds
     }
-  );
+  });
 
-  context.subscriptions.push(myStatusBarItem, disposable);
+  registerCommand(context, "codecat.meowWorld", () => {
+    vscode.window.showInformationMessage("Hello World from CodeCat!");
+  });
+  registerCommand(context, "codecat.petTheCat", () => {
+    if (status === "alert") {
+      vscode.window.showInformationMessage("Mrrreow! 😺💖");
+      return;
+    }
+    vscode.window.showInformationMessage("Brrrrrrr! 😾💤");
+  });
+
+  context.subscriptions.push(
+    new vscode.Disposable(() => clearInterval(interval))
+  );
+  context.subscriptions.push(onTextChanged);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

@@ -1,0 +1,32 @@
+{
+  "fonts": [
+    {
+      "id": "cat",
+      "src": [
+        {
+          "path": "./icomoon.woff",
+          "format": "woff"
+        }
+      ],
+      "weight": "normal",
+      "style": "normal"
+    }
+  ],
+  "iconDefinitions": {
+    "alert-1": {
+      "fontCharacter": "\\E900"
+    },
+    "sleeping-1": {
+      "fontCharacter": "\\E901"
+    },
+    "sleeping-2": {
+      "fontCharacter": "\\E902"
+    },
+    "sleeping-3": {
+      "fontCharacter": "\\E903"
+    },
+    "sleeping-4": {
+      "fontCharacter": "\\E904"
+    }
+  }
+}
