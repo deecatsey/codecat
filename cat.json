@@ -1,7 +1,7 @@
 {
   "fonts": [
     {
-      "id": "cat",
+      "id": "codecat",
       "src": [
         {
           "path": "./icomoon.woff",

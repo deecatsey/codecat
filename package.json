@@ -1,10 +1,16 @@
 {
-  "name": "codecat",
-  "displayName": "CodeCat",
-  "description": "Cat shaped rubber ducky for moral support.",
-  "version": "0.0.1",
+  "name": "coding-cat",
+  "displayName": "Code Cat",
+  "publisher": "dee-catsey",
+  "description": "Cat shaped rubber ducky that provides moral support from your status bar :).",
+  "version": "1.0.2",
+  "icon": "logo.png",
   "engines": {
     "vscode": "^1.105.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/deecatsey/codecat"
   },
   "categories": [
     "Other"
@@ -14,17 +20,13 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.toggleStatusBar",
-        "title": "Toggle Code Cat"
-      },
-      {
-        "command": "codecat.petTheCat",
-        "title": "Pet the cat!"
+        "command": "extension.toggleStatusBarCat",
+        "title": "Code Cat"
       }
     ],
     "productIconThemes": [
       {
-        "id": "icomoon",
+        "id": "codecat",
         "label": "Cat Icons",
         "path": "./cat.json"
       }

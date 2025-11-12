@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import { registerCommand } from "./utils";
 import { tooltipAlert, tooltipSleeping } from "./consts";
-import { register } from "module";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -68,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  registerCommand(context, "codecat.toggleStatusBar", () => {
+  registerCommand(context, "extension.toggleStatusBarCat", () => {
     statusBarVisible = !statusBarVisible;
     if (statusBarVisible) {
       statusBarItem.show();
