@@ -14,6 +14,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "extension.toggleStatusBar",
+        "title": "Toggle Code Cat"
+      },
+      {
         "command": "codecat.petTheCat",
         "title": "Pet the cat!"
       }

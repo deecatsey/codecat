@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import { registerCommand } from "./utils";
 import { tooltipAlert, tooltipSleeping } from "./consts";
+import { register } from "module";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -13,7 +14,8 @@ export function activate(context: vscode.ExtensionContext) {
   const framesAwake = [`$(alert-1)`];
   const framesSleeping = [`$(sleeping-1)`, `$(sleeping-2)`, `$(sleeping-3)`];
 
-  let status: "alert" | "sleeping" = "sleeping";
+  let statusBarVisible = true;
+  let catState: "alert" | "sleeping" = "sleeping";
   let frames = framesSleeping;
   let timeout: NodeJS.Timeout | undefined;
   let i = 0;
@@ -30,13 +32,13 @@ export function activate(context: vscode.ExtensionContext) {
   };
 
   const setCatAlert = () => {
-    status = "alert";
+    catState = "alert";
     statusBarItem.tooltip = tooltipAlert;
     statusBarItem.text = `${framesAwake[0]}`;
   };
 
   const setCatSleeping = () => {
-    status = "sleeping";
+    catState = "sleeping";
     statusBarItem.tooltip = tooltipSleeping;
     frames = framesSleeping;
     statusBarItem.text = `${frames[0]}`;
@@ -50,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.activeTextEditor &&
       event.document === vscode.window.activeTextEditor.document
     ) {
-      if (status !== "alert") {
+      if (catState !== "alert") {
         setCatAlert();
         clearInterval(interval);
       }
@@ -66,8 +68,17 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
+  registerCommand(context, "codecat.toggleStatusBar", () => {
+    statusBarVisible = !statusBarVisible;
+    if (statusBarVisible) {
+      statusBarItem.show();
+    } else {
+      statusBarItem.hide();
+    }
+  });
+
   registerCommand(context, "codecat.petTheCat", () => {
-    if (status === "alert") {
+    if (catState === "alert") {
       vscode.window.showInformationMessage("Mrrreow! 😺💖");
       return;
     }
