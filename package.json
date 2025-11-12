@@ -3,7 +3,7 @@
   "displayName": "Code Cat",
   "publisher": "dee-catsey",
   "description": "Cat shaped rubber ducky that provides moral support from your status bar.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "icon": "logo.png",
   "engines": {
     "vscode": "^1.105.0"
@@ -16,7 +16,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onStartupFinished"
+    "onStartupFinished",
+    "onCommand:extension.toggleStatusBarCat"
   ],
   "main": "./dist/extension.js",
   "contributes": {
