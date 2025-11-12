@@ -68,7 +68,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  registerCommand(context, "codecat.toggleStatusBar", () => {
+  registerCommand(context, "codecat.toggleStatusBarCat", () => {
     statusBarVisible = !statusBarVisible;
     if (statusBarVisible) {
       statusBarItem.show();
